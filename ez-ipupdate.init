@@ -13,6 +13,7 @@
 # Get network config
 . /etc/sysconfig/network
 
+PROGRAM_ARGS="-d -c /etc/ez-ipupdate.conf"
 # Get service config
 [ -f /etc/sysconfig/ez-ipupdate ] && . /etc/sysconfig/ez-ipupdate
 
@@ -25,7 +26,7 @@ if is_yes "${NETWORKING}"; then
 else
 	exit 0
 fi
-			
+
 RETVAL=0
 # See how we were called.
 case "$1" in
@@ -33,7 +34,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/ez-ipupdate ]; then
 		msg_starting "ez-ipupdate dynamic dns client"
-		daemon /usr/bin/ez-ipupdate -d -c /etc/ez-ipupdate.conf
+		daemon /usr/bin/ez-ipupdate $PROGRAM_ARGS
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ez-ipupdate		
 	else
@@ -43,7 +44,7 @@ case "$1" in
   stop)
 	if [ -f /var/lock/subsys/ez-ipupdate ]; then
 		msg_stopping "ez-ipupdate dynamic dns client"
-		killproc ez-ipupdate
+		killproc ez-ipupdate -QUIT
 		rm -f /var/run/ez-ipupdate.pid /var/lock/subsys/ez-ipupdate >/dev/null 2>&1
 	else
 		msg_not_running "ez-ipupdate dynamic dns client"
