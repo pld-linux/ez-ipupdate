@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# ez-ipupdate		ez-ipupdate (secure shell daemon)
+#
+# chkconfig:	345 55 45
+#
+# description:	ez-ipupdate - dynamic dns client
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/ez-ipupdate ] && . /etc/sysconfig/ez-ipupdate
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
+		msg_network_down "ez-ipupdate dynamic dns client"
+		exit 1
+	fi
+else
+	exit 0
+fi
+			
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/ez-ipupdate ]; then
+		msg_starting "ez-ipupdate dynamic dns client"
+		daemon /usr/sbin/ez-ipupdate -d -c /etc/ez-ipupdate.conf
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ez-ipupdate		
+	else
+		msg_already_running "ez-ipupdate dynamic dns client"
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/ez-ipupdate ]; then
+		msg_stopping "ez-ipupdate dynamic dns client"
+		killproc ez-ipupdate
+		rm -f /var/run/ez-ipupdate.pid /var/lock/subsys/ez-ipupdate >/dev/null 2>&1
+	else
+		msg_not_running "ez-ipupdate dynamic dns client"
+	fi	
+	;;
+  restart)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  status)
+	status ez-ipupdate
+	RETVAL=$?
+	ez_cache=$(grep -E '^[[:space:]]*cache-file' /etc/ez-ipupdate.conf |  cut -d "=" -f2)
+	LAST_IP=$(cat $ez_cache | cut -d "," -f2)
+	echo "Last IP update: $LAST_IP"
+	exit $RETVAL
+	;;
+  reload|force-reload)
+  	$stop
+	$start
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
