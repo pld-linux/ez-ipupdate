@@ -5,11 +5,11 @@ Version:	3.0.11b8
 Release:	2
 Group:		Networking
 License:	GPL
-Source0:	http://www.gusnet.cx/proj/ez-ipupdate/dist/%{name}-%{version}.tar.gz
+Source0:	http://ez-ipupdate.com/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
 Source1:	%{name}.init
 Source2:	%{name}.config
-URL:		http://www.gusnet.cx/proj/ez-ipupdate/
+URL:		http://ez-ipupdate.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	perl-base
