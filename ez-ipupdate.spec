@@ -47,7 +47,7 @@ install %{_datadir}/automake/config.* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/%{name}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
