@@ -2,12 +2,13 @@ Summary:	Client for Dynamic DNS Services
 Summary(pl):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
-Release:	1
+Release:	2
 Group:		Networking
 License:	GPL
 Source0:	http://www.gusnet.cx/proj/ez-ipupdate/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
 Source1:	%{name}.init
+Source2:	%{name}.config
 URL:		http://www.gusnet.cx/proj/ez-ipupdate/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -72,15 +73,16 @@ install %{_datadir}/automake/config.* .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/%{name}
 touch $RPM_BUILD_ROOT%{_sysconfdir}/%{name}.conf
 
-%{__perl} -pi -e "s|\%{_prefix}\/local\/bin|\%{_prefix}\/bin|" *.conf
+%{__perl} -pi -e "s|/usr/local/bin|%{_bindir}|" *.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -106,4 +108,5 @@ fi
 %doc README CHANGELOG *.conf
 %attr(755,root,root) %{_bindir}/*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/%{name}.conf
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/%{name}
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
