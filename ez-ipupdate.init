@@ -33,7 +33,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/ez-ipupdate ]; then
 		msg_starting "ez-ipupdate dynamic dns client"
-		daemon /usr/sbin/ez-ipupdate -d -c /etc/ez-ipupdate.conf
+		daemon /usr/bin/ez-ipupdate -d -c /etc/ez-ipupdate.conf
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ez-ipupdate		
 	else
