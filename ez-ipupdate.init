@@ -49,7 +49,7 @@ case "$1" in
 		msg_not_running "ez-ipupdate dynamic dns client"
 	fi	
 	;;
-  restart)
+  restart|force-reload)
 	$0 stop
 	$0 start
 	exit $?
@@ -62,12 +62,8 @@ case "$1" in
 	echo "Last IP update: $LAST_IP"
 	exit $RETVAL
 	;;
-  reload|force-reload)
-  	$stop
-	$start
-	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
 	exit 3
 esac
 
