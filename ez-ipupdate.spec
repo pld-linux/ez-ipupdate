@@ -2,13 +2,14 @@ Summary:	Client for Dynamic DNS Services
 Summary(pl):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
-Release:	3
+Release:	4
 Group:		Networking
 License:	GPL
 Source0:	http://ez-ipupdate.com/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
 Source1:	%{name}.init
 Source2:	%{name}.config
+Patch0:		%{name}-CAN-2004-0980.patch
 URL:		http://ez-ipupdate.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -63,6 +64,7 @@ Nie nale¿y zapomnieæ o utworzeniu w³asnego pliku konfiguracyjnego
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 install %{_datadir}/automake/config.* .
