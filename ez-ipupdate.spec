@@ -2,7 +2,7 @@ Summary:	Client for Dynamic DNS Services
 Summary(pl):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
-Release:	2
+Release:	3
 Group:		Networking
 License:	GPL
 Source0:	http://ez-ipupdate.com/dist/%{name}-%{version}.tar.gz
