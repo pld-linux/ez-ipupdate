@@ -1,9 +1,9 @@
-Summary:        Client for Dynamic DNS Services
+Summary:	Client for Dynamic DNS Services
 Summary(pl):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
 Release:	1
-Group:          Networking
+Group:		Networking
 License:	GPL
 Source0:	http://www.gusnet.cx/proj/ez-ipupdate/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
