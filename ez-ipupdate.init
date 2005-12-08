@@ -36,7 +36,7 @@ case "$1" in
 		msg_starting "ez-ipupdate dynamic dns client"
 		daemon /usr/bin/ez-ipupdate $PROGRAM_ARGS
 		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ez-ipupdate		
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ez-ipupdate
 	else
 		msg_already_running "ez-ipupdate dynamic dns client"
 	fi
@@ -48,7 +48,7 @@ case "$1" in
 		rm -f /var/run/ez-ipupdate.pid /var/lock/subsys/ez-ipupdate >/dev/null 2>&1
 	else
 		msg_not_running "ez-ipupdate dynamic dns client"
-	fi	
+	fi
 	;;
   restart|force-reload)
 	$0 stop
