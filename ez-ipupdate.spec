@@ -3,8 +3,8 @@ Summary(pl):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
 Release:	4
-Group:		Networking
 License:	GPL
+Group:		Networking
 Source0:	http://ez-ipupdate.com/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
 Source1:	%{name}.init
@@ -14,6 +14,7 @@ URL:		http://ez-ipupdate.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	perl-base
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -37,8 +38,8 @@ the dynamic DNS service offered at:
 It is pure C and works on Linux, *BSD and Solaris.
 
 Don't forget to create your own config file (in
-/etc/ez-ipupdate.conf). You can find some example in
-/usr/share/doc/%{name}-%{version}.
+/etc/ez-ipupdate.conf). You can find some examples in
+%{_docdir}/%{name}-%{version}.
 
 %description -l pl
 ez-ipupdate to ma³e narzêdzie do uaktualniania nazwy hosta w dowolnym
@@ -60,7 +61,7 @@ Jest napisane w czystym C i dzia³a na Linuksie, *BSD oraz Solarisie.
 
 Nie nale¿y zapomnieæ o utworzeniu w³asnego pliku konfiguracyjnego
 (/etc/ez-ipupdate.conf). Przyk³ad mo¿na znale¼æ w katalogu
-/usr/share/doc/%{name}-%{version}.
+%{_docdir}/%{name}-%{version}.
 
 %prep
 %setup -q
@@ -91,17 +92,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add %{name}
-if [ -f /var/lock/subsys/%{name} ]; then
-	/etc/rc.d/init.d/%{name} restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/%{name} start\" to start %{name} daemon."
-fi
+%service %{name} restart "%{name} daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/%{name} ]; then
-		/etc/rc.d/init.d/%{name} stop >&2
-	fi
+	%service %{name} stop
 	/sbin/chkconfig --del %{name}
 fi
 
