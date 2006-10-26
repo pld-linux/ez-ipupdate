@@ -68,7 +68,7 @@ Nie nale¿y zapomnieæ o utworzeniu w³asnego pliku konfiguracyjnego
 %patch0 -p0
 
 %build
-install %{_datadir}/automake/config.* .
+install /usr/share/automake/config.* .
 %{__aclocal}
 %{__autoconf}
 %configure
