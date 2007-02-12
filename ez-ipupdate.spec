@@ -1,5 +1,5 @@
 Summary:	Client for Dynamic DNS Services
-Summary(pl.UTF-8):   Klient dla serwisów dynamicznego DNS
+Summary(pl.UTF-8):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
 Release:	5
