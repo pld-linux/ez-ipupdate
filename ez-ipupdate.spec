@@ -1,5 +1,5 @@
 Summary:	Client for Dynamic DNS Services
-Summary(pl):	Klient dla serwisÛw dynamicznego DNS
+Summary(pl.UTF-8):   Klient dla serwis√≥w dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
 Release:	5
@@ -41,9 +41,9 @@ Don't forget to create your own config file (in
 /etc/ez-ipupdate.conf). You can find some examples in
 %{_docdir}/%{name}-%{version}.
 
-%description -l pl
-ez-ipupdate to ma≥e narzÍdzie do uaktualniania nazwy hosta w dowolnym
-serwisie dynamicznego DNS spo∂rÛd:
+%description -l pl.UTF-8
+ez-ipupdate to ma≈Çe narzƒôdzie do uaktualniania nazwy hosta w dowolnym
+serwisie dynamicznego DNS spo≈õr√≥d:
  - http://www.ez-ip.net/
  - http://www.justlinux.com/
  - http://www.dhs.org/
@@ -57,10 +57,10 @@ serwisie dynamicznego DNS spo∂rÛd:
  - http://www.hn.org/
  - http://www.zoneedit.com/
 
-Jest napisane w czystym C i dzia≥a na Linuksie, *BSD oraz Solarisie.
+Jest napisane w czystym C i dzia≈Ça na Linuksie, *BSD oraz Solarisie.
 
-Nie naleøy zapomnieÊ o utworzeniu w≥asnego pliku konfiguracyjnego
-(/etc/ez-ipupdate.conf). Przyk≥ad moøna znaleºÊ w katalogu
+Nie nale≈ºy zapomnieƒá o utworzeniu w≈Çasnego pliku konfiguracyjnego
+(/etc/ez-ipupdate.conf). Przyk≈Çad mo≈ºna znale≈∫ƒá w katalogu
 %{_docdir}/%{name}-%{version}.
 
 %prep
