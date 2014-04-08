@@ -2,14 +2,17 @@ Summary:	Client for Dynamic DNS Services
 Summary(pl.UTF-8):	Klient dla serwisów dynamicznego DNS
 Name:		ez-ipupdate
 Version:	3.0.11b8
-Release:	5
+Release:	6
 License:	GPL
 Group:		Networking
 Source0:	http://ez-ipupdate.com/dist/%{name}-%{version}.tar.gz
 # Source0-md5:	000211add4c4845ffa4211841bff4fb0
 Source1:	%{name}.init
 Source2:	%{name}.config
-Patch0:		%{name}-CAN-2004-0980.patch
+Patch0:		%{name}-debian.patch
+# https://dev.openwrt.org/browser/packages/net/ez-ipupdate/patches
+Patch1:		002-ez_ipupdate_everydns.patch
+Patch2:		003-dnsexit.patch
 URL:		http://ez-ipupdate.com/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -65,7 +68,9 @@ Nie należy zapomnieć o utworzeniu własnego pliku konfiguracyjnego
 
 %prep
 %setup -q
-%patch0 -p0
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 install /usr/share/automake/config.* .
